@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 
 let x = canvas.width /2;
 let y = canvas.height - 100;
-let dx = 10;
+let dx = 0;
 let dy = 0;
 
 const lineHeight = 10;
@@ -12,24 +12,45 @@ const lineWidth = 75;
 const boxxyRadius = 50; 
 let jump = false;
 let fall = true;
+let left = false;
+let right = false;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-// below this
+// jump and fall press
+
 function keyDownHandler(e) {
-    if (e.keyCode === 32) {
+    if (e.keyCode == 38) {
         jump = true; 
         fall = false;
-        this.disabled = true;
     }
-}
-function keyUpHandler(e) {
-    if (e.keyCode === 32) {
-        jump = false;
+    //left
+    if (e.keyCode == 37) {
+        left = true; 
+        fall = true;
+    }
+    //right
+    if (e.keyCode == 39) {
+        right = true; 
         fall = true;
     }
 }
-// stops here
+function keyUpHandler(e) {
+    if (e.keyCode == 38) {
+        jump = false;
+        fall = true;
+    }
+    if (e.keyCode == 37) {
+        left = false;
+        fall = true;
+    }
+    if (e.keyCode == 39) {
+        right = false;
+        fall = true;
+    }
+}
+
+
 
 // coloring issues below here
 function drawBoxxy() {
@@ -64,9 +85,16 @@ function draw() {
    if (jump) {
     y -= 5;
 }
-    if (y <= 0) {
-        y = 0;
-    }
+//borders
+if (y <= 0) {
+    y = 0;
+}
+if (x <= 0) {
+    x = 0;
+}
+if (x >= 1230) {
+    x = 1230;
+}
 // boxxy falling
     if (fall) {
         y += 5;
@@ -75,7 +103,13 @@ function draw() {
     if (y >= 620) {
         y = 620;
     }
-// stops here
+    if (left) {
+        x -= 5;
+    }
+    if (right) {
+        x += 5;
+    }
+
     x += dx;
 }
 
