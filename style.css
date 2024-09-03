@@ -1,0 +1,23 @@
+*{
+    background: #4d4d4d;
+    padding: 0;
+    margin: 0;
+}
+
+canvas {
+    background: #000000;
+    display: block;
+    margin: 0 auto;
+}
+
+#startButton {
+    margin-left: 900px;
+    height: 100px;
+    width: 200px;
+    font-size: 50px;
+    background: #9c9c9c;
+    border-radius: 50px;
+    border: 50px black;
+    color: rgb(0, 0, 0);
+    cursor: pointer
+}
